@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 function Create(){
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
   const [task, setTask] = useState()
   const handleAdd = () =>{
-    axios.post('https://todo-backend-harsh.onrender.com/add', {task:task})
+    axios.post(`${API_URL}/add`, {task:task})
     .then(result => {
       location.reload();
     })
