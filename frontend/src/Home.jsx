@@ -8,13 +8,13 @@ const Home = () => {
 
     const [todos, setTodos] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:3001/get')
+        axios.get('https://todo-backend-harsh.onrender.com/get')
             .then(result => setTodos(result.data))
             .catch(err => console.log(err))
     }, [])
 
     function handleEdit(id){
-        axios.put('http://localhost:3001/update/'+id)
+        axios.put('https://todo-backend-harsh.onrender.com/update/'+id)
         .then(result => {
             location.reload();
         })
@@ -22,7 +22,7 @@ const Home = () => {
     }
 
     function handleDelete(id){
-        axios.delete('http://localhost:3001/delete/'+id)
+        axios.delete('https://todo-backend-harsh.onrender.com/delete/'+id)
         .then(result => {
             location.reload();
         })
