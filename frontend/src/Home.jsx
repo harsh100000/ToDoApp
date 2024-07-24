@@ -3,18 +3,19 @@ import Create from './Create'
 import axios from 'axios'
 import {BsCircleFill, BsFillTrashFill, BsFillCheckCircleFill} from 'react-icons/bs'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 const Home = () => {
-
     const [todos, setTodos] = useState([])
+
     useEffect(() => {
-        axios.get('https://todo-backend-harsh.onrender.com/get')
+        axios.get('http://localhost:3001/get')
             .then(result => setTodos(result.data))
             .catch(err => console.log(err))
     }, [])
 
     function handleEdit(id){
-        axios.put('https://todo-backend-harsh.onrender.com/update/'+id)
+        axios.put('http://localhost:3001/update/'+id)
         .then(result => {
             location.reload();
         })
@@ -22,16 +23,15 @@ const Home = () => {
     }
 
     function handleDelete(id){
-        axios.delete('https://todo-backend-harsh.onrender.com/delete/'+id)
+        axios.delete('http://localhost:3001/delete/'+id)
         .then(result => {
             location.reload();
         })
         .catch(err => console.log(err))
     }
 
-
     return (
-        <div className='home' >
+        <div className='home'>
             <h1>To-Do List</h1>
             <Create />
             {
@@ -40,7 +40,7 @@ const Home = () => {
                     <div><h2>No Records</h2></div>
                     :
                     todos.map(todo => (
-                        <div className='task' >
+                        <div className='task' key={todo._id}>
                             <div className="checkbox" onClick={() => handleEdit(todo._id)}>
                                 {todo.done ? <BsFillCheckCircleFill className='icon' />:<BsCircleFill className='icon'/>}
                                 <p className={todo.done ? "line_through":""} >{todo.task}</p>
@@ -48,7 +48,6 @@ const Home = () => {
                             <div>
                                 <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
                             </div>
-
                         </div>
                     ))
             }
