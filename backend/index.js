@@ -13,7 +13,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .catch(err => console.error('Could not connect to MongoDB:', err))
 
 const corsOptions = {
-origin: process.env.FRONTEND_URL || 'http://localhost:3000', // replace with your frontend URL
+origin: process.env.FRONTEND_URL || 'https://todo-frontend-harsh.onrender.com/',
 optionsSuccessStatus: 200
 }
 
